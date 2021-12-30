@@ -4,23 +4,39 @@ import * as _Hooks from "https://cdn.skypack.dev/preact@10.4.7/hooks"; // for pr
 import htm from "https://cdn.skypack.dev/htm@3.0.4"; // for htm
 
 // EXPORTS
+/**
+ * specifying exports so that they can be used within other JavaScript scripts
+ * in the application. Without these exports we tend to run into import errors with
+ * the Preact library so these are essential when using JS Modules.
+ */
 export const html = htm.bind(_Preact.h);
 export const Preact = _Preact;
 export const Hooks = _Hooks;
 
 // OTHER FUNCTIONS
+/**
+ * Takes in a float and the number of significant figures and returns the
+ * corresponding float rounded to the specified significant figures
+ *
+ * @param {float} num a float number that wants to be rounded
+ * @param {int} sig the number of significant figures to be returned
+ * @returns a rounded number to the specified significance level
+ */
 function sig_round(num, sig) {
     sig = 10 ** sig;
     return Math.round(num * sig) / sig;
 }
 
-// PAGE FUNCTION
+// COMPONENTS
+/**
+ * A row component that is used within the InputTable component
+ */
 const InputRow = (props) => {
     const { row, index, setDataRow } = props;
 
     return html`
         <tr>
-            <td>${index}</td>
+            <td>${index + 1}</td>
             <td>
                 <input
                     type="number"
@@ -47,6 +63,11 @@ const InputRow = (props) => {
     `;
 };
 
+/**
+ * A collection of InputRows. No real functionality is given to this table
+ * where the main purpose of having this component is to section it off
+ * from the rest of the application.
+ */
 const InputTable = (props) => {
     const { data, setDataRow } = props;
 
@@ -75,6 +96,9 @@ const InputTable = (props) => {
     `;
 };
 
+/**
+ * Contains the results from the linear regression.
+ */
 const ResultsTable = (props) => {
     const { results } = props;
 
@@ -108,6 +132,10 @@ const ResultsTable = (props) => {
     `;
 };
 
+/**
+ * A Plotly plot containing a visualized result from calculated linear
+ * regression.
+ */
 const ResultsPlot = (props) => {
     const { data, y_hat, results } = props;
 
@@ -133,13 +161,11 @@ const ResultsPlot = (props) => {
 
             // setting the layout for the plot
             var layout = {
+                height: 450,
+                width: 675,
                 title: "Actual vs. Fitted: Linear Regression",
-                xaxis: {
-                    title: "X-axis",
-                },
-                yaxis: {
-                    title: "Y-axis",
-                },
+                xaxis: {},
+                yaxis: {},
             };
 
             // plotting the data to the DOM
@@ -150,6 +176,10 @@ const ResultsPlot = (props) => {
     return html`<div id="results-plot" style="width: 100%;"></div> `;
 };
 
+/**
+ * Contains the main page component. This is the highest level component in the
+ * application that contains all of the high level data being used on the page.
+ */
 const Page = () => {
     const [data, setData] = Hooks.useState(
         Array.from(Array(20)).map((_, i) => {
