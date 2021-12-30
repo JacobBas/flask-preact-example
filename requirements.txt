@@ -1,0 +1,12 @@
+# for creating the HTTP server
+flask==2.0.2
+flask-restx==0.5.1
+
+# for calculating a linear regression
+scipy==1.7.3
+
+# for making HTTP requests
+requests==2.26.0
+
+# for formatting code
+black==21.12b0
