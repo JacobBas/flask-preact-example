@@ -1,0 +1,17 @@
+html {
+    font-family: "Roboto Mono", monospace;
+}
+
+.main-container {
+    display: grid;
+    grid-template-areas: "data-input results";
+    gap: 10px;
+}
+
+#data-input {
+    grid-area: "data-input";
+}
+
+#resutls {
+    grid-area: "results";
+}
