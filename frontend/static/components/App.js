@@ -42,7 +42,6 @@ export const App = () => {
         setY_hat(
             Array.from(Array(n + 1)).map((_, i) => {
                 let x = (max - min) * (i / n) + min;
-                console.log("x =", x);
                 let y_hat = x * results.slope + results.intercept;
                 return { x: x, y_hat: y_hat };
             })
