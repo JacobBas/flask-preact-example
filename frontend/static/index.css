@@ -2,6 +2,11 @@ html {
     font-family: "Roboto Mono", monospace;
 }
 
+#root {
+    width: 1150px;
+    margin: 0.5rem auto;
+}
+
 .main-container {
     display: grid;
     grid-template-areas: "data-input results";
